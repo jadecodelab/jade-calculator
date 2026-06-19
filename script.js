@@ -163,3 +163,34 @@ function backspace() {
 backspaceBtn.addEventListener("click", () => {
   backspace();
 });
+
+document.addEventListener("keydown", (event) => {
+  if (event.key >= "0" && event.key <= "9") {
+    appendNumber(event.key);
+  }
+
+  if (
+    event.key === "+" ||
+    event.key === "-" ||
+    event.key === "*" ||
+    event.key === "/"
+  ) {
+    setOperator(event.key);
+  }
+
+  if (event.key === "Enter") {
+    evaluate();
+  }
+
+  if (event.key === ".") {
+    appendDecimal();
+  }
+
+  if (event.key === "Backspace") {
+    backspace();
+  }
+
+  if (event.key === "Escape") {
+    clear();
+  }
+});
