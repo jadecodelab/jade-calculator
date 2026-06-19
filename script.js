@@ -5,6 +5,7 @@ let operator = "";
 let resetDisplay = false;
 
 // DOM Elements
+const logoBtn = document.getElementById("logo");
 const display = document.querySelector("#display");
 
 const numberButtons = document.querySelectorAll(".number");
@@ -147,6 +148,10 @@ function updateDecimalBtn() {
 }
 
 // Event Listeners
+logoBtn.addEventListener("click", () => {
+  display.textContent = "Good luck :)";
+});
+
 decimalBtn.addEventListener("click", appendDecimal);
 
 equalsBtn.addEventListener("click", () => {
