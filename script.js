@@ -62,7 +62,6 @@ const operatorButtons = document.querySelectorAll(".operators button");
 numberButtons.forEach((button) => {
   button.addEventListener("click", () => {
     appendNumber(button.textContent);
-    printState();
   });
 });
 
@@ -75,7 +74,6 @@ operatorButtons.forEach((button) => {
       printState();
     } else {
       setOperator(value);
-      printState();
     }
   });
 });
@@ -100,12 +98,32 @@ function clear() {
   display.textContent = "";
 }
 
-const clearBtn = document.querySelector("#clear");
-clearBtn.addEventListener("click", () => {
-  clear();
-  printState();
-});
+const clearBtn = document.getElementById("clear");
+clearBtn.addEventListener("click", clear);
 
 function printState() {
   console.log({ firstNum, operator, secondNum });
 }
+
+const decimalBtn = document.getElementById("decimal");
+
+function appendDecimal() {
+  if (operator === "") {
+    if (firstNum.includes(".")) return;
+    if (firstNum === "") {
+      firstNum = "0.";
+    } else {
+      firstNum += ".";
+    }
+  } else {
+    if (secondNum.includes(".")) return;
+    if (secondNum === "") {
+      secondNum = "0.";
+    } else {
+      secondNum += ".";
+    }
+  }
+  printState();
+}
+
+decimalBtn.addEventListener("click", appendDecimal);
