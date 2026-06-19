@@ -34,7 +34,9 @@ function appendNumber(num) {
   if (resetDisplay) {
     firstNum = "";
     secondNum = "";
+
     resetDisplay = false;
+    updateDecimalBtn();
   }
 
   if (operator === "") {
@@ -54,6 +56,7 @@ function setOperator(op) {
   }
 
   operator = op;
+  updateDecimalBtn();
 }
 
 const numberButtons = document.querySelectorAll(".numbers button");
@@ -89,6 +92,7 @@ function evaluate() {
   operator = "";
 
   resetDisplay = true;
+  updateDecimalBtn();
 }
 
 function clear() {
@@ -96,6 +100,8 @@ function clear() {
   secondNum = "";
   operator = "";
   display.textContent = "";
+
+  updateDecimalBtn();
 }
 
 const clearBtn = document.getElementById("clear");
@@ -117,7 +123,6 @@ function appendDecimalToNumber(num) {
   }
 
   display.textContent = num;
-  printState();
 }
 
 function appendDecimal() {
@@ -127,7 +132,18 @@ function appendDecimal() {
     secondNum = appendDecimalToNumber(secondNum);
   }
 
-  printState();
+  updateDecimalBtn();
+}
+
+function updateDecimalBtn() {
+  let currnum;
+
+  if (operator === "") {
+    currnum = firstNum;
+  } else {
+    currnum = secondNum;
+  }
+  decimalBtn.disabled = currnum.includes(".");
 }
 
 decimalBtn.addEventListener("click", appendDecimal);
