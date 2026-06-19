@@ -107,22 +107,26 @@ function printState() {
 
 const decimalBtn = document.getElementById("decimal");
 
+function appendDecimalToNumber(num) {
+  if (num.includes(".")) return num;
+
+  if (num === "") {
+    return "0.";
+  } else {
+    return (num += ".");
+  }
+
+  display.textContent = num;
+  printState();
+}
+
 function appendDecimal() {
   if (operator === "") {
-    if (firstNum.includes(".")) return;
-    if (firstNum === "") {
-      firstNum = "0.";
-    } else {
-      firstNum += ".";
-    }
+    firstNum = appendDecimalToNumber(firstNum);
   } else {
-    if (secondNum.includes(".")) return;
-    if (secondNum === "") {
-      secondNum = "0.";
-    } else {
-      secondNum += ".";
-    }
+    secondNum = appendDecimalToNumber(secondNum);
   }
+
   printState();
 }
 
