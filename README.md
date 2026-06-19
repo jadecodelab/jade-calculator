@@ -28,11 +28,11 @@ A clean, responsive calculator built with **HTML, CSS, and JavaScript** as part 
 
 ## Live Demo
 
-[Live Demo](#)
+[Live Demo](https://jadecodelab.github.io/jade-calculator/)
 
 ## Screenshots
 
-_Add screenshots here_
+![Screenshot](./screenshot.png)
 
 ## What I Learned
 
