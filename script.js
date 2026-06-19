@@ -147,3 +147,19 @@ function updateDecimalBtn() {
 }
 
 decimalBtn.addEventListener("click", appendDecimal);
+
+const backspaceBtn = document.getElementById("backspace");
+function backspace() {
+  if (secondNum) {
+    secondNum = secondNum.slice(0, -1);
+  } else if (operator) {
+    operator = "";
+  } else {
+    firstNum = firstNum.slice(0, -1);
+  }
+  printState();
+}
+
+backspaceBtn.addEventListener("click", () => {
+  backspace();
+});
