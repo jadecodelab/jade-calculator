@@ -26,9 +26,17 @@ function operate(operator, a, b) {
 let firstNum = "";
 let secondNum = "";
 let operator = "";
+let resetDisplay = false;
+
 const display = document.querySelector("#display");
 
 function appendNumber(num) {
+  if (resetDisplay) {
+    firstNum = "";
+    secondNum = "";
+    resetDisplay = false;
+  }
+
   if (operator === "") {
     firstNum += num;
     display.textContent = firstNum;
@@ -81,6 +89,8 @@ function evaluate() {
   firstNum = result.toString();
   secondNum = "";
   operator = "";
+
+  resetDisplay = true;
 }
 
 function clear() {
