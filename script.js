@@ -1,3 +1,20 @@
+// State
+let firstNum = "";
+let secondNum = "";
+let operator = "";
+let resetDisplay = false;
+
+// DOM Elements
+const display = document.querySelector("#display");
+
+const numberButtons = document.querySelectorAll(".numbers button");
+const operatorButtons = document.querySelectorAll(".operators button");
+
+const clearBtn = document.getElementById("clear");
+const decimalBtn = document.getElementById("decimal");
+const backspaceBtn = document.getElementById("backspace");
+
+// Math Functions
 function add(a, b) {
   return a + b;
 }
@@ -23,13 +40,7 @@ function operate(operator, a, b) {
   else return "Invalid operator!";
 }
 
-let firstNum = "";
-let secondNum = "";
-let operator = "";
-let resetDisplay = false;
-
-const display = document.querySelector("#display");
-
+// Functions for Calculator Logic
 function appendNumber(num) {
   if (resetDisplay) {
     firstNum = "";
@@ -59,30 +70,8 @@ function setOperator(op) {
   updateDecimalBtn();
 }
 
-const numberButtons = document.querySelectorAll(".numbers button");
-const operatorButtons = document.querySelectorAll(".operators button");
-
-numberButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    appendNumber(button.textContent);
-  });
-});
-
-operatorButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const value = button.textContent;
-
-    if (value === "=") {
-      evaluate();
-      printState();
-    } else {
-      setOperator(value);
-    }
-  });
-});
-
 function evaluate() {
-  if (firstNum === "" || secondNum === "" || operate === "") return;
+  if (firstNum === "" || secondNum === "" || operator === "") return;
 
   const result = operate(operator, Number(firstNum), Number(secondNum));
   display.textContent = result;
@@ -104,14 +93,36 @@ function clear() {
   updateDecimalBtn();
 }
 
-const clearBtn = document.getElementById("clear");
-clearBtn.addEventListener("click", clear);
+function appendDecimal() {
+  if (operator === "") {
+    firstNum = appendDecimalToNumber(firstNum);
+  } else {
+    secondNum = appendDecimalToNumber(secondNum);
+  }
 
+  updateDecimalBtn();
+}
+
+function backspace() {
+  if (secondNum) {
+    secondNum = secondNum.slice(0, -1);
+    display.textContent = secondNum;
+  } else if (operator) {
+    operator = "";
+    display.textContent = firstNum;
+  } else {
+    firstNum = firstNum.slice(0, -1);
+    display.textContent = firstNum;
+  }
+
+  updateDecimalBtn();
+  printState();
+}
+
+// Helper Functions
 function printState() {
   console.log({ firstNum, operator, secondNum });
 }
-
-const decimalBtn = document.getElementById("decimal");
 
 function appendDecimalToNumber(num) {
   if (num.includes(".")) return num;
@@ -121,18 +132,6 @@ function appendDecimalToNumber(num) {
   } else {
     return (num += ".");
   }
-
-  display.textContent = num;
-}
-
-function appendDecimal() {
-  if (operator === "") {
-    firstNum = appendDecimalToNumber(firstNum);
-  } else {
-    secondNum = appendDecimalToNumber(secondNum);
-  }
-
-  updateDecimalBtn();
 }
 
 function updateDecimalBtn() {
@@ -148,17 +147,27 @@ function updateDecimalBtn() {
 
 decimalBtn.addEventListener("click", appendDecimal);
 
-const backspaceBtn = document.getElementById("backspace");
-function backspace() {
-  if (secondNum) {
-    secondNum = secondNum.slice(0, -1);
-  } else if (operator) {
-    operator = "";
-  } else {
-    firstNum = firstNum.slice(0, -1);
-  }
-  printState();
-}
+// Event Listeners
+numberButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    appendNumber(button.textContent);
+  });
+});
+
+operatorButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const value = button.textContent;
+
+    if (value === "=") {
+      evaluate();
+      printState();
+    } else {
+      setOperator(value);
+    }
+  });
+});
+
+clearBtn.addEventListener("click", clear);
 
 backspaceBtn.addEventListener("click", () => {
   backspace();
