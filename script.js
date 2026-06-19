@@ -30,7 +30,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-  if (b === 0) return "Oops! Can't divide by 0!";
+  if (b === 0) return "Error! division by 0";
   return a / b;
 }
 
@@ -44,12 +44,9 @@ function operate(operator, a, b) {
 
 // Functions for Calculator Logic
 function appendNumber(num) {
-  if (resetDisplay) {
+  if (resetDisplay && operator === "") {
     firstNum = "";
-    secondNum = "";
-
     resetDisplay = false;
-    updateDecimalBtn();
   }
 
   if (operator === "") {
@@ -60,7 +57,7 @@ function appendNumber(num) {
     display.textContent = secondNum;
   }
 
-  console.log(firstNum, operator, secondNum);
+  updateDecimalBtn();
 }
 
 function setOperator(op) {
@@ -76,13 +73,14 @@ function evaluate() {
   if (firstNum === "" || secondNum === "" || operator === "") return;
 
   const result = operate(operator, Number(firstNum), Number(secondNum));
+
   display.textContent = result;
 
   firstNum = result.toString();
   secondNum = "";
   operator = "";
 
-  updateDecimalBtn();
+  resetDisplay = true;
 }
 
 function clear() {
