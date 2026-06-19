@@ -26,7 +26,7 @@ function operate(operator, a, b) {
 let firstNum = "";
 let secondNum = "";
 let operator = "";
-const display = document.querySelector(".display");
+const display = document.querySelector("#display");
 
 function appendNumber(num) {
   if (operator === "") {
@@ -55,7 +55,35 @@ numberButtons.forEach((button) => {
 
 operatorButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    operator = button.textContent;
-    display.textContent = operator;
+    const value = button.textContent;
+
+    if (value === "=") {
+      evaluate();
+    } else {
+      setOperator(value);
+    }
   });
+});
+
+function evaluate() {
+  if (firstNum === "" || secondNum === "" || operate === "") return;
+
+  const result = operate(operator, Number(firstNum), Number(secondNum));
+  display.textContent = result;
+
+  firstNum = result.toString();
+  secondNum = "";
+  operator = "";
+}
+
+function clear() {
+  firstNum = "";
+  secondNum = "";
+  operator = "";
+  display.textContent = "";
+}
+
+const clearBtn = document.querySelector("#clear");
+clearBtn.addEventListener("click", () => {
+  clear();
 });
