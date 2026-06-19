@@ -11,7 +11,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-  if (b === 0) return "Can't divide by 0!";
+  if (b === 0) return "Oops! Can't divide by 0!";
   return a / b;
 }
 
@@ -41,6 +41,10 @@ function appendNumber(num) {
 }
 
 function setOperator(op) {
+  if (firstNum && secondNum && operator) {
+    evaluate();
+  }
+
   operator = op;
 }
 
@@ -50,6 +54,7 @@ const operatorButtons = document.querySelectorAll(".operators button");
 numberButtons.forEach((button) => {
   button.addEventListener("click", () => {
     appendNumber(button.textContent);
+    printState();
   });
 });
 
@@ -59,8 +64,10 @@ operatorButtons.forEach((button) => {
 
     if (value === "=") {
       evaluate();
+      printState();
     } else {
       setOperator(value);
+      printState();
     }
   });
 });
@@ -86,4 +93,9 @@ function clear() {
 const clearBtn = document.querySelector("#clear");
 clearBtn.addEventListener("click", () => {
   clear();
+  printState();
 });
+
+function printState() {
+  console.log({ firstNum, operator, secondNum });
+}
