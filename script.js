@@ -7,8 +7,10 @@ let resetDisplay = false;
 // DOM Elements
 const display = document.querySelector("#display");
 
-const numberButtons = document.querySelectorAll(".numbers button");
-const operatorButtons = document.querySelectorAll(".operators button");
+const numberButtons = document.querySelectorAll(".number");
+const operatorButtons = document.querySelectorAll(".operator");
+
+const equalsBtn = document.getElementById("equals");
 
 const clearBtn = document.getElementById("clear");
 const decimalBtn = document.getElementById("decimal");
@@ -80,7 +82,6 @@ function evaluate() {
   secondNum = "";
   operator = "";
 
-  resetDisplay = true;
   updateDecimalBtn();
 }
 
@@ -88,7 +89,7 @@ function clear() {
   firstNum = "";
   secondNum = "";
   operator = "";
-  display.textContent = "";
+  display.textContent = "0";
 
   updateDecimalBtn();
 }
@@ -96,8 +97,10 @@ function clear() {
 function appendDecimal() {
   if (operator === "") {
     firstNum = appendDecimalToNumber(firstNum);
+    display.textContent = firstNum;
   } else {
     secondNum = appendDecimalToNumber(secondNum);
+    display.textContent = secondNum;
   }
 
   updateDecimalBtn();
@@ -145,9 +148,14 @@ function updateDecimalBtn() {
   decimalBtn.disabled = currnum.includes(".");
 }
 
+// Event Listeners
 decimalBtn.addEventListener("click", appendDecimal);
 
-// Event Listeners
+equalsBtn.addEventListener("click", () => {
+  evaluate();
+  resetDisplay = true;
+});
+
 numberButtons.forEach((button) => {
   button.addEventListener("click", () => {
     appendNumber(button.textContent);
@@ -156,14 +164,7 @@ numberButtons.forEach((button) => {
 
 operatorButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    const value = button.textContent;
-
-    if (value === "=") {
-      evaluate();
-      printState();
-    } else {
-      setOperator(value);
-    }
+    setOperator(button.textContent);
   });
 });
 
