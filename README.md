@@ -32,7 +32,7 @@ A clean, responsive calculator built with **HTML, CSS, and JavaScript** as part 
 
 ## Screenshots
 
-<img src="./screenshots/screenshot.png" alt="Calculator App" width="500">
+<img src="./screenshots.png" alt="Calculator App" width="500">
 
 ## What I Learned
 
