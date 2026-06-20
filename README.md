@@ -11,11 +11,13 @@ A clean, responsive calculator built with **HTML, CSS, and JavaScript** as part 
   - Division (/)
 
 - Chained calculations
+- Running expression display showing the full calculation as you type
 - Decimal support
 - Backspace functionality
 - Clear button
 - Keyboard support
 - Division-by-zero handling
+- Dynamic display sizing to prevent overflow on long results
 - Responsive design for desktop and mobile
 - Custom jade-inspired UI theme
 - 🍀 Lucky button with an encouraging message
@@ -33,9 +35,9 @@ A clean, responsive calculator built with **HTML, CSS, and JavaScript** as part 
 ## Screenshots
 
 <p align="center">
-  <img src="./screenshots/default.png" alt="Default View" width="250">
+  <img src="./screenshots/expression-display.png" alt="Calculator" width="300">
   &nbsp;&nbsp;&nbsp;
-  <img src="./screenshots/logo.png" alt="Logo" width="250">
+  <img src="./screenshots/goodluck.png" alt="Logo" width="300">
 
 </p>
 
