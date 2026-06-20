@@ -32,7 +32,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-  if (b === 0) return "Error! division by 0";
+  if (b === 0) return "Error!";
   return a / b;
 }
 
@@ -81,10 +81,20 @@ function setOperator(op) {
   updateExpressionDisplay();
 }
 
+function formatResult(num) {
+  if (typeof num !== "number" || !isFinite(num)) return num;
+  let formatted = parseFloat(num.toPrecision(10)).toString();
+  if (formatted.length > 12) {
+    formatted = num.toExponential(4); // e.g. 1.2346e+15 for huge numbers
+  }
+  return formatted;
+}
+
 function evaluate() {
   if (firstNum === "" || secondNum === "" || operator === "") return;
 
-  const result = operate(operator, Number(firstNum), Number(secondNum));
+  const rawResult = operate(operator, Number(firstNum), Number(secondNum));
+  const result = formatResult(rawResult);
 
   expressiomDisplay.textContent = `${firstNum} ${operator} ${secondNum} =`;
 
