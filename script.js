@@ -7,6 +7,7 @@ let resetDisplay = false;
 // DOM Elements
 const logoBtn = document.getElementById("logo");
 const display = document.querySelector("#display");
+const expressiomDisplay = document.querySelector("#expression-display");
 
 const numberButtons = document.querySelectorAll(".number");
 const operatorButtons = document.querySelectorAll(".operator");
@@ -43,11 +44,19 @@ function operate(operator, a, b) {
   else return "Invalid operator!";
 }
 
+function updateExpressionDisplay() {
+  let expr = firstNum;
+  if (operator) expr += ` ${operator} `;
+  if (secondNum) expr += secondNum;
+  expressiomDisplay.textContent = expr;
+}
+
 // Functions for Calculator Logic
 function appendNumber(num) {
   if (resetDisplay && operator === "") {
     firstNum = "";
     resetDisplay = false;
+    expressiomDisplay.textContent = "";
   }
 
   if (operator === "") {
@@ -59,6 +68,7 @@ function appendNumber(num) {
   }
 
   updateDecimalBtn();
+  updateExpressionDisplay();
 }
 
 function setOperator(op) {
@@ -68,12 +78,15 @@ function setOperator(op) {
 
   operator = op;
   updateDecimalBtn();
+  updateExpressionDisplay();
 }
 
 function evaluate() {
   if (firstNum === "" || secondNum === "" || operator === "") return;
 
   const result = operate(operator, Number(firstNum), Number(secondNum));
+
+  expressiomDisplay.textContent = `${firstNum} ${operator} ${secondNum} =`;
 
   display.textContent = result;
 
@@ -89,6 +102,7 @@ function clear() {
   secondNum = "";
   operator = "";
   display.textContent = "0";
+  expressiomDisplay.textContent = "";
 
   updateDecimalBtn();
 }
@@ -103,6 +117,7 @@ function appendDecimal() {
   }
 
   updateDecimalBtn();
+  updateExpressionDisplay();
 }
 
 function backspace() {
@@ -118,6 +133,7 @@ function backspace() {
   }
 
   updateDecimalBtn();
+  updateExpressionDisplay();
   printState();
 }
 

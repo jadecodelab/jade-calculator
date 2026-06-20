@@ -35,6 +35,14 @@ body {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
 }
 
+#expression-display {
+  font-size: 0.9rem;
+  color: #888;
+  text-align: right;
+  min-height: 1.2rem;
+  padding: 0 8px;
+}
+
 #display {
   height: 80px;
   margin-bottom: 20px;
